@@ -2,7 +2,7 @@
 # No rules are defined here so this is safe to include at the beginning of other makefiles
 
 OS := $(shell uname -s)
-ARCH ?= $(subst aarch64,arm64,$(subst x86_64,amd64,$(shell uname -m)))
+ARCH ?= $(subst aarch64,arm64,$(subst x86_64,amd64,$(subst loongarch64,loong64,$(shell uname -m))))
 ifneq (,$(findstring MINGW,$(OS))$(findstring MSYS,$(OS)))
 	OS := windows
 	ARCH := $(shell systeminfo 2>/dev/null | grep "System Type" | grep ARM64 > /dev/null && echo "arm64" || echo "amd64" )
