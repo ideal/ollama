@@ -125,17 +125,13 @@ Lastly, run Ollama:
 go run . serve
 ```
 
-## MLX Engine (Optional)
+However, if you are running on LoongArch64, currently you need to run:
 
-The MLX engine enables running safetensor based models. It requires building the [MLX](https://github.com/ml-explore/mlx) and [MLX-C](https://github.com/ml-explore/mlx-c) shared libraries separately via CMake.  On MacOS, MLX leverages the Metal library to run on the GPU, and on Windows and Linux, runs on NVIDIA GPUs via CUDA v13.
-
-### macOS (Apple Silicon)
-
-Requires the Metal toolchain. Install [Xcode](https://developer.apple.com/xcode/) first, then:
-
-```shell
-xcodebuild -downloadComponent MetalToolchain
 ```
+CGO_CFLAGS_ALLOW=-mlasx CGO_CPPFLAGS_ALLOW=-mlasx go run . serve
+```
+
+## MLX Engine (Optional)
 
 Verify it's installed correctly (should print "no input files"):
 
@@ -184,6 +180,12 @@ OLLAMA_MLX_SOURCE=../mlx OLLAMA_MLX_C_SOURCE=../mlx-c ./scripts/build_darwin.sh
 $env:OLLAMA_MLX_SOURCE="../mlx"
 $env:OLLAMA_MLX_C_SOURCE="../mlx-c"
 ./scripts/build_darwin.ps1
+=======
+However, if you are running on LoongArch64, currently you need to run:
+
+```
+CGO_CFLAGS_ALLOW=-mlasx CGO_CPPFLAGS_ALLOW=-mlasx go run . serve
+>>>>>>> 38b11797 (add flag -mlasx to build ggml-cpu on loongarch64)
 ```
 
 ## Docker
